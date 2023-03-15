@@ -2,6 +2,8 @@ package com.ntt.data.app.controller;
 
 import com.ntt.data.app.exception.InvalidDocumentException;
 import com.ntt.data.app.model.Cliente;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v01/clientes")
 public class ClienteController {
+    public static final Logger LOGGER = LoggerFactory.getLogger(ClienteController.class);
     @GetMapping
     public ResponseEntity<Cliente> obtenerCliente(@RequestParam String tipoDocumento, @RequestParam String numeroDocumento) {
+        LOGGER.info("Solicitud recibida para obtener cliente con tipoDocumento: {} y numeroDocumento: {}", tipoDocumento, numeroDocumento);
+
         if (!tipoDocumento.matches("^[CP]$")) {
             throw new InvalidDocumentException("Tipo de documento inválido");
         }
@@ -22,8 +27,10 @@ public class ClienteController {
         }
         if (tipoDocumento.equals("C") && numeroDocumento.equals("23445322")) {
             Cliente cliente = crearCliente("Juan", "Carlos", "Pérez", "García", "3001234567", "Calle 123 #45-67", "Bogotá");
+            LOGGER.info("Cliente encontrado: {}", cliente);
             return new ResponseEntity<>(cliente, HttpStatus.OK);
         } else {
+            LOGGER.warn("Cliente no encontrado para tipoDocumento: {} y numeroDocumento: {}", tipoDocumento, numeroDocumento);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
