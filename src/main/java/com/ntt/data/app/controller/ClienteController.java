@@ -19,9 +19,8 @@ public class ClienteController {
         if (!numeroDocumento.matches("^\\d+$") && !tipoDocumento.equals("P")) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        Cliente cliente = obtenerClientePorDocumento(tipoDocumento, numeroDocumento);
-
-        if (cliente != null) {
+        if (tipoDocumento.equals("C") && numeroDocumento.equals("23445322")) {
+            Cliente cliente = crearCliente("Juan", "Carlos", "Pérez", "García", "3001234567", "Calle 123 #45-67", "Bogotá");
             return new ResponseEntity<>(cliente, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -39,14 +38,4 @@ public class ClienteController {
             cliente.setCiudad(ciudad);
             return cliente;
         }
-    private Cliente obtenerClientePorDocumento(String tipoDocumento, String numeroDocumento) {
-        if (tipoDocumento.equals("C") && numeroDocumento.equals("23445322")) {
-            return crearCliente("Juan", "Carlos", "Pérez", "García", "3001234567", "Calle 123 #45-67", "Bogotá");
-        } else if (tipoDocumento.equals("P") && numeroDocumento.equals("P123456789")) {
-            return crearCliente("Maria", "Fernanda", "Rodríguez", "López", "3129876543", "Avenida 456 #78-90", "Medellín");
-        }
-        return null;
-    }
-
-
 }
