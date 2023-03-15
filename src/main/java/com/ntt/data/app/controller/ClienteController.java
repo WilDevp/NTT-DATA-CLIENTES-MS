@@ -1,5 +1,6 @@
 package com.ntt.data.app.controller;
 
+import com.ntt.data.app.exception.InvalidDocumentException;
 import com.ntt.data.app.model.Cliente;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +15,10 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<Cliente> obtenerCliente(@RequestParam String tipoDocumento, @RequestParam String numeroDocumento) {
         if (!tipoDocumento.matches("^[CP]$")) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new InvalidDocumentException("Tipo de documento inválido");
         }
         if (!numeroDocumento.matches("^\\d+$") && !tipoDocumento.equals("P")) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new InvalidDocumentException("Número de documento inválido");
         }
         if (tipoDocumento.equals("C") && numeroDocumento.equals("23445322")) {
             Cliente cliente = crearCliente("Juan", "Carlos", "Pérez", "García", "3001234567", "Calle 123 #45-67", "Bogotá");
