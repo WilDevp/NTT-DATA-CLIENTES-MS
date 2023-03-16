@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "2c665c68-04f2-470e-aba1-9deb67594b3c",
+		"name": "NTT-DATA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26250735"
+	},
+	"item": [
+		{
+			"name": "200",
+			"item": [
+				{
+					"name": "200 Http",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v01/clientes?tipoDocumento=C&numeroDocumento=23445322",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v01",
+								"clientes"
+							],
+							"query": [
+								{
+									"key": "tipoDocumento",
+									"value": "C"
+								},
+								{
+									"key": "numeroDocumento",
+									"value": "23445322"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "400",
+			"item": [
+				{
+					"name": "400 Http documento no válido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v01/clientes?tipoDocumento=X&numeroDocumento=23445322",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v01",
+								"clientes"
+							],
+							"query": [
+								{
+									"key": "tipoDocumento",
+									"value": "X"
+								},
+								{
+									"key": "numeroDocumento",
+									"value": "23445322"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 Http numero de documento no valido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v01/clientes?tipoDocumento=C&numeroDocumento=abc123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v01",
+								"clientes"
+							],
+							"query": [
+								{
+									"key": "tipoDocumento",
+									"value": "C"
+								},
+								{
+									"key": "numeroDocumento",
+									"value": "abc123"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "404",
+			"item": [
+				{
+					"name": "404 Htpp Not found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v01/clientes?tipoDocumento=C&numeroDocumento=11111111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v01",
+								"clientes"
+							],
+							"query": [
+								{
+									"key": "tipoDocumento",
+									"value": "C"
+								},
+								{
+									"key": "numeroDocumento",
+									"value": "11111111"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
